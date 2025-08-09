@@ -1,0 +1,12 @@
+package com.lian.marketing.paymentmicroservice.infrastructure.driving.http.exceptionhandler;
+
+import java.time.LocalDateTime;
+
+public record ExceptionResponse(
+        String status,
+        int code,
+        String message,
+        LocalDateTime timestamp,
+        String type
+) {
+}
