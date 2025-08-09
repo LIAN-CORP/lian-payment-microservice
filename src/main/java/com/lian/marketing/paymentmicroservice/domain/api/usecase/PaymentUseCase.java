@@ -5,8 +5,6 @@ import com.lian.marketing.paymentmicroservice.domain.model.Payment;
 import com.lian.marketing.paymentmicroservice.domain.spi.IPaymentPersistencePort;
 import lombok.RequiredArgsConstructor;
 
-import java.time.LocalDateTime;
-
 @RequiredArgsConstructor
 public class PaymentUseCase implements IPaymentServicePort {
 
