@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -13,11 +14,10 @@ import java.util.UUID;
 @Getter @Setter
 public class Debt {
     private UUID id;
-    private Double totalAmount;
-    private Double remainingAmount;
+    private BigDecimal totalAmount;
+    private BigDecimal remainingAmount;
     private StatusDebt status;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private UUID clientId;
-    private UUID transactionId;
 }

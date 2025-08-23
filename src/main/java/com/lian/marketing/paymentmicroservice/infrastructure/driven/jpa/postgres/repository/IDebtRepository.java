@@ -10,6 +10,6 @@ import java.util.UUID;
 
 @Repository
 public interface IDebtRepository extends JpaRepository<DebtEntity, UUID> {
-    @Query(value = "SELECT * FROM public.Debt WHERE status = 'PENDING' AND clientId = :clientId", nativeQuery = true)
+    @Query(value = "SELECT * FROM public.Debt WHERE status = 'PENDING' AND client_id = :clientId", nativeQuery = true)
     Optional<DebtEntity> findActiveDebtByClientId(UUID clientId);
 }

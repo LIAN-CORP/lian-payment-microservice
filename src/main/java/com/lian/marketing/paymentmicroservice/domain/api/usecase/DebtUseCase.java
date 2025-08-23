@@ -20,11 +20,14 @@ public class DebtUseCase implements IDebtServicePort {
         if(activeDebt.isEmpty()){
             debt.setRemainingAmount(debt.getTotalAmount());
             debt.setStatus(StatusDebt.PENDING);
+            debt.setCreatedAt(LocalDateTime.now());
+            debt.setUpdatedAt(LocalDateTime.now());
             debtPersistencePort.saveDebt(debt);
             return;
         }
         debt.setId(activeDebt.get().getId());
-        debt.setTotalAmount(debt.getTotalAmount() + activeDebt.get().getTotalAmount());
+        debt.setRemainingAmount(activeDebt.get().getRemainingAmount().add(debt.getTotalAmount()));
+        debt.setTotalAmount(debt.getTotalAmount().add(activeDebt.get().getTotalAmount()));
         debt.setStatus(StatusDebt.PENDING);
         debt.setCreatedAt(activeDebt.get().getCreatedAt());
         debt.setUpdatedAt(LocalDateTime.now());

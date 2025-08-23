@@ -13,7 +13,7 @@ public class DebtHandler {
     private final IDebtServicePort debtServicePort;
     private final IDebtMapper debtMapper;
 
-    public boolean createDebt(CreateDebtRequest request) {
-        return debtServicePort.createDebtFromTransaction(debtMapper.toModelFromRequest(request));
+    public void createDebt(CreateDebtRequest request) {
+        debtServicePort.createDebtFromTransaction(debtMapper.toModelFromRequest(request));
     }
 }
