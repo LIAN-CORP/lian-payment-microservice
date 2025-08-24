@@ -19,4 +19,7 @@ public class PaymentHandler {
         paymentServicePort.createPaymentFromTransaction(paymentMapper.toModelFromRequest(request));
     }
 
+    public void createPaymentDebt(CreatePaymentRequest request) {
+        paymentServicePort.createPaymentDebt(paymentMapper.toModelFromRequest(request));
+    }
 }

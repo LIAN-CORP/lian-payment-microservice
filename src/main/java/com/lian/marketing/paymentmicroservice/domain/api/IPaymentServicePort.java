@@ -4,4 +4,5 @@ import com.lian.marketing.paymentmicroservice.domain.model.Payment;
 
 public interface IPaymentServicePort {
     void createPaymentFromTransaction(Payment payment);
+    void createPaymentDebt(Payment payment);
 }

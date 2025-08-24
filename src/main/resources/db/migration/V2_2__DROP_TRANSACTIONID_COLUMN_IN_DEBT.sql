@@ -1,0 +1,1 @@
+ALTER TABLE public.Debt DROP COLUMN transaction_id;

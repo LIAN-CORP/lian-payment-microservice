@@ -8,4 +8,6 @@ import java.util.UUID;
 public interface IDebtPersistencePort {
     void saveDebt(Debt debt);
     Optional<Debt> findActiveDebtByClientId(UUID clientId);
+    boolean existsAndActiveByDebtAndClientId(UUID debtId, UUID clientId);
+    Optional<Debt> findById(UUID debtId);
 }

@@ -23,4 +23,10 @@ public class PaymentController {
         return ResponseEntity.ok().build();
     }
 
+    @PostMapping("/debt")
+    public ResponseEntity<Void> createPaymentDebt(@Valid @RequestBody CreatePaymentRequest request) {
+        paymentHandler.createPaymentDebt(request);
+        return ResponseEntity.ok().build();
+    }
+
 }
