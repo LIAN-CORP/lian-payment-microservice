@@ -16,10 +16,11 @@ public class DebtBeanConfiguration {
 
     private final IDebtRepository debtRepository;
     private final IDebtEntityMapper debtEntityMapper;
+    private final WebClientBeanConfiguration webClientBeanConfiguration;
 
     @Bean
     public IDebtPersistencePort debtPersistencePort() {
-        return new DebtAdapter(debtRepository, debtEntityMapper);
+        return new DebtAdapter(debtRepository, debtEntityMapper, webClientBeanConfiguration.webClient());
     }
 
     @Bean

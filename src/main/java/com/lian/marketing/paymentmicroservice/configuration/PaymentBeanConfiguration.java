@@ -9,7 +9,6 @@ import com.lian.marketing.paymentmicroservice.infrastructure.driven.jpa.postgres
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.reactive.function.client.WebClient;
 
 @Configuration
 @RequiredArgsConstructor
@@ -18,17 +17,11 @@ public class PaymentBeanConfiguration {
     private final IPaymentRepository paymentRepository;
     private final IPaymentEntityMapper paymentEntityMapper;
     private final DebtBeanConfiguration debtBeanConfiguration;
-
-    @Bean
-    public WebClient webClient() {
-        return WebClient.builder()
-                .baseUrl("http://localhost:8082")
-                .build();
-    }
+    private final WebClientBeanConfiguration webClientBeanConfiguration;
 
     @Bean
     public IPaymentPersistencePort paymentPersistencePort() {
-        return new PaymentAdapter(paymentEntityMapper, paymentRepository, webClient());
+        return new PaymentAdapter(paymentEntityMapper, paymentRepository, webClientBeanConfiguration.webClient());
     }
 
     @Bean
