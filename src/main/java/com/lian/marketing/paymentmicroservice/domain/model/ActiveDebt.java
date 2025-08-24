@@ -6,6 +6,7 @@ import java.util.UUID;
 public record ActiveDebt(
     UUID id,
     BigDecimal remainingAmount,
-    String client
+    String client,
+    UUID clientId
 ) {
 }
