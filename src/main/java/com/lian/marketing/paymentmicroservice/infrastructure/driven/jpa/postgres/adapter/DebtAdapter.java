@@ -24,4 +24,14 @@ public class DebtAdapter implements IDebtPersistencePort {
     public Optional<Debt> findActiveDebtByClientId(UUID clientId) {
         return debtRepository.findActiveDebtByClientId(clientId).map(debtEntityMapper::toModelFromEntity);
     }
+
+    @Override
+    public boolean existsAndActive(UUID debtId) {
+        return debtRepository.existsAndActive(debtId);
+    }
+
+    @Override
+    public Optional<Debt> findById(UUID debtId) {
+        return debtRepository.findById(debtId).map(debtEntityMapper::toModelFromEntity);
+    }
 }

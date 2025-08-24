@@ -1,0 +1,1 @@
+ALTER TABLE public.Payment ALTER COLUMN payment_date TYPE timestamp(6) USING payment_date::timestamp;
