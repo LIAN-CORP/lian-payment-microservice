@@ -2,13 +2,12 @@ package com.lian.marketing.paymentmicroservice.infrastructure.driving.http.contr
 
 import com.lian.marketing.paymentmicroservice.application.dto.request.CreateDebtRequest;
 import com.lian.marketing.paymentmicroservice.application.handler.DebtHandler;
+import com.lian.marketing.paymentmicroservice.domain.model.ActiveDebt;
+import com.lian.marketing.paymentmicroservice.domain.model.ContentPage;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/debt")
@@ -23,4 +22,14 @@ public class DebtController {
         return ResponseEntity.ok().build();
     }
 
+    @GetMapping("/active")
+    public ResponseEntity<ContentPage<ActiveDebt>> findActiveDebts(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "true") boolean dateAsc
+    ) {
+        return ResponseEntity.ok().body(
+                debtHandler.findActiveDebts(page, size, dateAsc)
+        );
+    }
 }

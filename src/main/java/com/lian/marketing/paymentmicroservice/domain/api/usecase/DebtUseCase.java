@@ -4,6 +4,7 @@ import com.lian.marketing.paymentmicroservice.domain.api.IDebtServicePort;
 import com.lian.marketing.paymentmicroservice.domain.constant.ExceptionConstants;
 import com.lian.marketing.paymentmicroservice.domain.exception.DebtDoNotExists;
 import com.lian.marketing.paymentmicroservice.domain.exception.RemainingAmountIsOverTheLimitException;
+import com.lian.marketing.paymentmicroservice.domain.model.ActiveDebt;
 import com.lian.marketing.paymentmicroservice.domain.model.ContentPage;
 import com.lian.marketing.paymentmicroservice.domain.model.Debt;
 import com.lian.marketing.paymentmicroservice.domain.model.StatusDebt;
@@ -65,7 +66,30 @@ public class DebtUseCase implements IDebtServicePort {
     }
 
     @Override
-    public ContentPage<Debt> findActiveDebts(int page, int size, boolean dateAsc) {
-        return debtPersistencePort.findActiveDebts(page, size, dateAsc);
+    public ContentPage<ActiveDebt> findActiveDebts(int page, int size, boolean dateAsc) {
+        ContentPage<Debt> debts = debtPersistencePort.findActiveDebts(page, size, dateAsc);
+        return mapToActiveDebt(debts);
+    }
+
+    private String getClientNameById(UUID clientId){
+        return debtPersistencePort.getClientNameByIdFromTransaction(clientId);
+    }
+
+    private ContentPage<ActiveDebt> mapToActiveDebt(ContentPage<Debt> debts){
+        List<ActiveDebt> activeDebts = debts.getContent()
+                .stream()
+                .map(debt -> new ActiveDebt(debt.getId(),
+                        debt.getRemainingAmount(),
+                        getClientNameById(debt.getClientId()))
+                ).toList();
+        ContentPage<ActiveDebt> activeDebtsPage = new ContentPage<>();
+        activeDebtsPage.setTotalPage(debts.getTotalPage());
+        activeDebtsPage.setTotalElements(debts.getTotalElements());
+        activeDebtsPage.setPageNumber(debts.getPageNumber());
+        activeDebtsPage.setPageSize(debts.getPageSize());
+        activeDebtsPage.setFirst(debts.isFirst());
+        activeDebtsPage.setLast(debts.isLast());
+        activeDebtsPage.setContent(activeDebts);
+        return activeDebtsPage;
     }
 }

@@ -3,7 +3,6 @@ package com.lian.marketing.paymentmicroservice.domain.spi;
 import com.lian.marketing.paymentmicroservice.domain.model.ContentPage;
 import com.lian.marketing.paymentmicroservice.domain.model.Debt;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -13,4 +12,5 @@ public interface IDebtPersistencePort {
     boolean existsAndActiveByDebtAndClientId(UUID debtId, UUID clientId);
     Optional<Debt> findById(UUID debtId);
     ContentPage<Debt> findActiveDebts(int page, int size, boolean dateAsc);
+    String getClientNameByIdFromTransaction(UUID clientId);
 }
