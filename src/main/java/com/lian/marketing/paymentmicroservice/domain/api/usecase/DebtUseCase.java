@@ -40,8 +40,8 @@ public class DebtUseCase implements IDebtServicePort {
     }
 
     @Override
-    public boolean existsAndActive(UUID debtId) {
-        return debtPersistencePort.existsAndActive(debtId);
+    public boolean existsAndActiveByDebtAndClientId(UUID debtId, UUID clientId) {
+        return debtPersistencePort.existsAndActiveByDebtAndClientId(debtId, clientId);
     }
 
     @Override

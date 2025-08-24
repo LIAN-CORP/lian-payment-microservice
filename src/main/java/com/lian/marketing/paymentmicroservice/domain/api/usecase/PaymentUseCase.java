@@ -27,7 +27,7 @@ public class PaymentUseCase implements IPaymentServicePort {
         if(!paymentPersistencePort.clientExists(payment.getClientId())){
             throw new UserDoNoExists(ExceptionConstants.USER_DO_NOT_EXISTS);
         }
-        if(!debtServicePort.existsAndActive(payment.getDebtId())){
+        if(!debtServicePort.existsAndActiveByDebtAndClientId(payment.getDebtId(), payment.getClientId())){
             throw new DebtDoNotExists(ExceptionConstants.DEBT_DO_NOT_EXISTS);
         }
         paymentPersistencePort.savePayment(payment);

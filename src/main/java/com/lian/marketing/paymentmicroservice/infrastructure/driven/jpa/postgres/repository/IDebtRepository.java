@@ -13,6 +13,6 @@ public interface IDebtRepository extends JpaRepository<DebtEntity, UUID> {
     @Query(value = "SELECT * FROM public.Debt WHERE status = 'PENDING' AND client_id = :clientId", nativeQuery = true)
     Optional<DebtEntity> findActiveDebtByClientId(UUID clientId);
 
-    @Query(value = "SELECT EXISTS(SELECT 1 FROM public.Debt WHERE id = :id AND status = 'PENDING')", nativeQuery = true)
-    boolean existsAndActive(UUID id);
+    @Query(value = "SELECT EXISTS(SELECT 1 FROM public.Debt WHERE id = :id AND status = 'PENDING' AND client_id = :clientId)", nativeQuery = true)
+    boolean existsAndActiveByDebtAndClientId(UUID id, UUID clientId);
 }

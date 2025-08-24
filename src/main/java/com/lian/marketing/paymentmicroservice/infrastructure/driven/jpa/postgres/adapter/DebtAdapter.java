@@ -26,8 +26,8 @@ public class DebtAdapter implements IDebtPersistencePort {
     }
 
     @Override
-    public boolean existsAndActive(UUID debtId) {
-        return debtRepository.existsAndActive(debtId);
+    public boolean existsAndActiveByDebtAndClientId(UUID debtId, UUID clientId) {
+        return debtRepository.existsAndActiveByDebtAndClientId(debtId, clientId);
     }
 
     @Override

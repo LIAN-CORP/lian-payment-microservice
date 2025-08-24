@@ -7,6 +7,6 @@ import java.util.UUID;
 
 public interface IDebtServicePort {
     void createDebtFromTransaction(Debt debt);
-    boolean existsAndActive(UUID debtId);
+    boolean existsAndActiveByDebtAndClientId(UUID debtId, UUID clientId);
     void updateTotalRemainingAmount(BigDecimal remainingAmount, UUID debtId);
 }
