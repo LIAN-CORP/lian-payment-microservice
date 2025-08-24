@@ -53,6 +53,9 @@ public class DebtUseCase implements IDebtServicePort {
         if(debt.get().getRemainingAmount().compareTo(remainingAmount) < 0){
             throw new RemainingAmountIsOverTheLimitException(ExceptionConstants.REMAINING_AMOUNT_IS_OVER_THE_LIMIT);
         }
+        if(debt.get().getRemainingAmount().compareTo(remainingAmount) == 0){
+            debt.get().setStatus(StatusDebt.PAID);
+        }
         Debt updatedDebt = debt.get();
         updatedDebt.setUpdatedAt(LocalDateTime.now());
         updatedDebt.setRemainingAmount(updatedDebt.getRemainingAmount().subtract(remainingAmount));
