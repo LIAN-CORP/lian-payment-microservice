@@ -10,6 +10,8 @@ import com.lian.marketing.paymentmicroservice.domain.spi.IPaymentPersistencePort
 import lombok.RequiredArgsConstructor;
 
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.UUID;
 
 @RequiredArgsConstructor
 public class PaymentUseCase implements IPaymentServicePort {
@@ -32,5 +34,11 @@ public class PaymentUseCase implements IPaymentServicePort {
         }
         paymentPersistencePort.savePayment(payment);
         debtServicePort.updateTotalRemainingAmount(BigDecimal.valueOf(payment.getAmount()), payment.getDebtId());
+    }
+
+    @Override
+    public List<Payment> findDebtPaymentsByDebtId(UUID debtId) {
+        debtServicePort.existsActiveDebtById(debtId);
+        return paymentPersistencePort.findAllByDebtId(debtId);
     }
 }

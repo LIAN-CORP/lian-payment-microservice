@@ -7,4 +7,5 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface IPaymentEntityMapper {
     PaymentEntity toEntityFromModel(Payment payment);
+    Payment toModelFromEntity(PaymentEntity paymentEntity);
 }

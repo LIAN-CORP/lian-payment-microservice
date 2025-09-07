@@ -71,6 +71,13 @@ public class DebtUseCase implements IDebtServicePort {
         return mapToActiveDebt(debts);
     }
 
+    @Override
+    public void existsActiveDebtById(UUID id) {
+        if(!debtPersistencePort.existsActiveDebtById(id)){
+            throw new DebtDoNotExists(ExceptionConstants.DEBT_DO_NOT_EXISTS);
+        }
+    }
+
     private String getClientNameById(UUID clientId){
         return debtPersistencePort.getClientNameByIdFromTransaction(clientId);
     }

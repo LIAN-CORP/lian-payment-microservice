@@ -7,6 +7,7 @@ import com.lian.marketing.paymentmicroservice.infrastructure.driven.jpa.postgres
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import java.util.List;
 import java.util.UUID;
 
 @RequiredArgsConstructor
@@ -29,5 +30,13 @@ public class PaymentAdapter implements IPaymentPersistencePort {
                 .bodyToMono(Boolean.class)
                 .blockOptional()
                 .orElse(false);
+    }
+
+    @Override
+    public List<Payment> findAllByDebtId(UUID debtId) {
+        return paymentRepository.findByDebtId(debtId)
+          .stream()
+          .map(paymentEntityMapper::toModelFromEntity)
+          .toList();
     }
 }

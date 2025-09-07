@@ -13,4 +13,5 @@ public interface IDebtPersistencePort {
     Optional<Debt> findById(UUID debtId);
     ContentPage<Debt> findActiveDebts(int page, int size, boolean dateAsc);
     String getClientNameByIdFromTransaction(UUID clientId);
+    boolean existsActiveDebtById(UUID id);
 }

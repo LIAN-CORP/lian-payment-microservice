@@ -2,13 +2,14 @@ package com.lian.marketing.paymentmicroservice.infrastructure.driving.http.contr
 
 import com.lian.marketing.paymentmicroservice.application.dto.request.CreatePaymentRequest;
 import com.lian.marketing.paymentmicroservice.application.handler.PaymentHandler;
+import com.lian.marketing.paymentmicroservice.domain.model.Payment;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/payment")
@@ -27,6 +28,11 @@ public class PaymentController {
     public ResponseEntity<Void> createPaymentDebt(@Valid @RequestBody CreatePaymentRequest request) {
         paymentHandler.createPaymentDebt(request);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/debt/{id}")
+    public ResponseEntity<List<Payment>> findDebtPaymentsByDebtId(@PathVariable UUID id) {
+        return ResponseEntity.ok().body(paymentHandler.findDebtPaymentsByDebtId(id));
     }
 
 }
