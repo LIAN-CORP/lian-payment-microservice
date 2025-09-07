@@ -20,4 +20,7 @@ public interface IDebtRepository extends JpaRepository<DebtEntity, UUID> {
 
     @Query(value = "SELECT * FROM public.Debt WHERE status = 'PENDING'", nativeQuery = true)
     Page<DebtEntity> findActiveDebts(Pageable pageable);
+
+    @Query(value = "SELECT EXISTS(SELECT 1 FROM public.Debt WHERE id = :id AND status = 'PENDING')", nativeQuery = true)
+    boolean existsActiveDebtById(UUID id);
 }

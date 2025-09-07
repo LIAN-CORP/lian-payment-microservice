@@ -74,4 +74,9 @@ public class DebtAdapter implements IDebtPersistencePort {
                 .bodyToMono(String.class)
                 .block();
     }
+
+    @Override
+    public boolean existsActiveDebtById(UUID id) {
+        return debtRepository.existsActiveDebtById(id);
+    }
 }
