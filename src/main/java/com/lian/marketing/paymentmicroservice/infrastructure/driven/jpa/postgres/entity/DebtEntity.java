@@ -37,4 +37,7 @@ public class DebtEntity {
 
     @Column(name = "client_id")
     private UUID clientId;
+
+    @Column(name = "transaction_id")
+    private UUID transactionId;
 }

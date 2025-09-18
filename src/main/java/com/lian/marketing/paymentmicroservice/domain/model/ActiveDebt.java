@@ -7,6 +7,7 @@ public record ActiveDebt(
     UUID id,
     BigDecimal remainingAmount,
     String client,
-    UUID clientId
+    UUID clientId,
+    UUID transactionId
 ) {
 }

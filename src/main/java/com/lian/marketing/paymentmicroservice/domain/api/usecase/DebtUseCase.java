@@ -88,7 +88,9 @@ public class DebtUseCase implements IDebtServicePort {
                 .map(debt -> new ActiveDebt(debt.getId(),
                         debt.getRemainingAmount(),
                         getClientNameById(debt.getClientId()),
-                        debt.getClientId())
+                        debt.getClientId(),
+                        debt.getTransactionId()
+                  )
                 ).toList();
         ContentPage<ActiveDebt> activeDebtsPage = new ContentPage<>();
         activeDebtsPage.setTotalPage(debts.getTotalPage());

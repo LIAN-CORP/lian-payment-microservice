@@ -20,4 +20,5 @@ public class Debt {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private UUID clientId;
+    private UUID transactionId;
 }

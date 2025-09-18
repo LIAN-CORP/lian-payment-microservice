@@ -12,6 +12,9 @@ public record CreateDebtRequest(
         BigDecimal totalAmount,
 
         @NotNull(message = RequestConstants.DEBT_CLIENT_ID_MUST_BE_NOT_EMPTY)
-        UUID clientId
+        UUID clientId,
+
+        @NotNull(message = RequestConstants.DEBT_TRANSACTION_ID_MUST_BE_NOT_EMPTY)
+        UUID transactionId
 ) {
 }
