@@ -38,6 +38,3 @@ out/
 
 ### ENV ###
 .env
-
-### FLYWAY ###
-src/main/resources/db/migration/

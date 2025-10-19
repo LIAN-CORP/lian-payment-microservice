@@ -1,0 +1,1 @@
+ALTER TABLE public.Debt ADD COLUMN transaction_id UUID NOT NULL default uuid_generate_v4();

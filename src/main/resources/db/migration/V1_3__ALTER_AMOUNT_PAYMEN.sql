@@ -1,0 +1,1 @@
+ALTER TABLE public.Payment ALTER COLUMN amount TYPE NUMERIC(10,2);
