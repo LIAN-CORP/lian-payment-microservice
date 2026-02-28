@@ -9,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RestController
 @RequestMapping("/debt")
 @RequiredArgsConstructor
@@ -31,5 +33,10 @@ public class DebtController {
         return ResponseEntity.ok().body(
                 debtHandler.findActiveDebts(page, size, dateAsc)
         );
+    }
+
+    @GetMapping("/active/client/{id}")
+    public ResponseEntity<Boolean> hasActiveDebtByClientId(@PathVariable UUID id) {
+        return ResponseEntity.ok().body(debtHandler.hasActiveDebtByClientId(id));
     }
 }

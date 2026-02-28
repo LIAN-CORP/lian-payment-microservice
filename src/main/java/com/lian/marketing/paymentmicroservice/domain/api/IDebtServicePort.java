@@ -13,4 +13,5 @@ public interface IDebtServicePort {
     void updateTotalRemainingAmount(BigDecimal remainingAmount, UUID debtId);
     ContentPage<ActiveDebt> findActiveDebts(int page, int size, boolean dateAsc);
     void existsActiveDebtById(UUID id);
+    boolean hasAciveDebtByClientId(UUID clientId);
 }
