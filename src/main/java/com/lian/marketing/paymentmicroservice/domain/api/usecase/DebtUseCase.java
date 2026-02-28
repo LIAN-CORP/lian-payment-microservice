@@ -78,6 +78,11 @@ public class DebtUseCase implements IDebtServicePort {
         }
     }
 
+    @Override
+    public boolean hasAciveDebtByClientId(UUID clientId) {
+        return debtPersistencePort.findActiveDebtByClientId(clientId).isPresent();
+    }
+
     private String getClientNameById(UUID clientId){
         return debtPersistencePort.getClientNameByIdFromTransaction(clientId);
     }

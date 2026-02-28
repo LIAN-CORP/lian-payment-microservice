@@ -9,6 +9,8 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -23,5 +25,9 @@ public class DebtHandler {
 
     public ContentPage<ActiveDebt> findActiveDebts(int page, int size, boolean dateAsc) {
         return debtServicePort.findActiveDebts(page, size, dateAsc);
+    }
+
+    public Boolean hasActiveDebtByClientId(UUID clientId) {
+        return debtServicePort.hasAciveDebtByClientId(clientId);
     }
 }
