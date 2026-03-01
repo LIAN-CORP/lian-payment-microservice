@@ -33,13 +33,19 @@ public class DebtUseCase implements IDebtServicePort {
             debtPersistencePort.saveDebt(debt);
             return;
         }
+        BigDecimal differenceAmount = calculateRemainingAmount(debt.getTotalAmount(), activeDebt.get().getTotalAmount());
+
         debt.setId(activeDebt.get().getId());
-        debt.setRemainingAmount(activeDebt.get().getRemainingAmount().add(debt.getTotalAmount()));
-        debt.setTotalAmount(debt.getTotalAmount().add(activeDebt.get().getTotalAmount()));
+        debt.setTotalAmount(debt.getTotalAmount());
+        debt.setRemainingAmount(activeDebt.get().getRemainingAmount().add(differenceAmount));
         debt.setStatus(StatusDebt.PENDING);
         debt.setCreatedAt(activeDebt.get().getCreatedAt());
         debt.setUpdatedAt(LocalDateTime.now());
         debtPersistencePort.saveDebt(debt);
+    }
+
+    private BigDecimal calculateRemainingAmount(BigDecimal newTotalAmount, BigDecimal prevTotalAmount){
+        return newTotalAmount.subtract(prevTotalAmount);
     }
 
     @Override
